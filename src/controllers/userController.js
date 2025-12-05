@@ -79,7 +79,7 @@ exports.loginUser = async (req, res) => {
     res.status(200).json({
       message: 'Login bem-sucedido!',
       token: token,
-      user: { id: user.id, name: user.name, email: user.email }
+      user: { id: user.id, name: user.name, email: user.email, role: user.role }
     });
 
   } catch (err) {
@@ -158,8 +158,8 @@ exports.forgotPassword = async (req, res) => {
 };
 
 exports.resetPassword = async (req, res) => {
-    const { token } = req.params; // Token virá da URL
-    const { password } = req.body; // Nova senha virá do corpo
+    const { token } = req.params;
+    const { password } = req.body;
 
     try {
         const userQuery = await db.query(
@@ -206,7 +206,7 @@ exports.getUserById = async (req, res) => {
     const { id } = req.params;
 
     const user = await db.query(
-      'SELECT id, name, email, created_at FROM users WHERE id = $1',
+      'SELECT id, name, email, role, created_at FROM users WHERE id = $1',
       [id]
     );
 
