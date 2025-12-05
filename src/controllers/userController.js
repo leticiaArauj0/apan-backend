@@ -118,7 +118,7 @@ exports.forgotPassword = async (req, res) => {
             [token, now, user.id]
         );
 
-        const resetLink = `http://localhost:5173/reset-password/${token}`;
+        const resetLink = `https://apan-frontend.vercel.app/reset-password/${token}`;
 
         const mailOptions = {
           to: email,
